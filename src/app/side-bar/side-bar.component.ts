@@ -1,11 +1,11 @@
-import {Component, EventEmitter, OnInit, Output, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent implements OnInit, OnChanges, AfterViewInit {
   idComponent: any;
   @Output() idEmitter: EventEmitter<any> = new EventEmitter<any>();
   @Output() clickTruthEmitter: EventEmitter<any> = new EventEmitter<any>();

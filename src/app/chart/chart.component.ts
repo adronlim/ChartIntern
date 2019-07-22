@@ -65,48 +65,51 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
     this.showError = false;
 
     this.Service.messageError$.subscribe(error => {
-      console.log('%cSUBSCRIBE!!!! CHARTCOMPONENT', 'background: #222; color: #bada55');
-      console.log(error);
-      setTimeout(() => {    //<<<---    using ()=> syntax
-        this.showError = error;
-        if (!error) {
-          this.styleChart = 'container';
-          // this.styleContainer = 'container';
-          // this.styleError = 'noDisplay';
-          this.styleHeight = {'height': '800px'};
-        } else {
-          this.styleChart = 'noDisplay';
-          // this.styleContainer = 'container';
-          // this.styleError = 'container';
-          this.styleHeight = {'height': '300px'};
+      this.Service.idReceive$.subscribe(id => {
+        console.log('%cSUBSCRIBE!!!! CHARTCOMPONENT', 'background: #222; color: #bada55');
+        console.log(error);
+        setTimeout(() => {    //<<<---    using ()=> syntax
+          this._idComponentChart = id;
+          this.showError = error;
+          if (!error) {
+            this.styleChart = 'container';
+            // this.styleContainer = 'container';
+            // this.styleError = 'noDisplay';
+            this.styleHeight = {'height': '800px'};
+          } else {
+            this.styleChart = 'noDisplay';
+            // this.styleContainer = 'container';
+            // this.styleError = 'container';
+            this.styleHeight = {'height': '300px'};
+          }
+        });
+        // console.log(this.showError);
+      });
+      this.statKey = 'str';
+      this.subscription = this.Service.get2dHeroes().subscribe(data => {
+        console.log(this._idComponentChart);
+        if (this.Service.findKeyAvailable(data, 'HEROES', 'statSetting')) {
+          this.chartData = data;
+          console.log(this.chartData);
+          this.setParameter(); // To get value of currentIndex & multiYvalue
+          this.processData(true);
+
+          if (!this.is3D && this.first) {
+            this.triggerButton = false;
+            // console.log('TRIGGER BUTTON IS FALSE!!!!');
+          }
+          this.loadChartComponent(this.processedData);
+
+          // console.log('TRIGGER BUTTON IS ', this.triggerButton);
+          // console.log(this.keySlength > 3 === this.is3D);
+          // console.log('keySlength >3 : \n', this.keySlength > 3);
+          // console.log('is3D  : \n', this.is3D);
+          // console.log(this.HeroesDataS);
+          // console.log('HEY!');
+
+          this.first = false;
         }
       });
-      // console.log(this.showError);
-    });
-    this.statKey = 'str';
-    this.subscription = this.Service.get2dHeroes().subscribe(data => {
-      console.log(this._idComponentChart);
-      if (this.Service.findKeyAvailable(data, 'HEROES', 'statSetting')) {
-        this.chartData = data;
-        console.log(this.chartData);
-        this.setParameter(); // To get value of currentIndex & multiYvalue
-        this.processData(true);
-
-        if (!this.is3D && this.first) {
-          this.triggerButton = false;
-          // console.log('TRIGGER BUTTON IS FALSE!!!!');
-        }
-        this.loadChartComponent(this.processedData);
-
-        // console.log('TRIGGER BUTTON IS ', this.triggerButton);
-        // console.log(this.keySlength > 3 === this.is3D);
-        // console.log('keySlength >3 : \n', this.keySlength > 3);
-        // console.log('is3D  : \n', this.is3D);
-        // console.log(this.HeroesDataS);
-        // console.log('HEY!');
-
-        this.first = false;
-      }
     });
   }
 

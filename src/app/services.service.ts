@@ -15,6 +15,8 @@ export class ServicesService {
   // settingKeys: [];
   private messageError = new BehaviorSubject<boolean>(false);
   messageError$ = this.messageError.asObservable();
+  private idComponent = new BehaviorSubject<string>('');
+  idReceive$ = this.idComponent.asObservable();
 
   static getChartId(min, max) {
     let hoursMinutes = time.getTime();
@@ -23,7 +25,7 @@ export class ServicesService {
     min = Math.ceil(min);
     max = Math.floor(max);
 
-    return of(Math.abs(Math.floor(Math.random() * (max - min - influencer)) + min).toString()); //The maximum is exclusive and the minimum is inclusive
+  return of(Math.abs(Math.floor(Math.random() * (max - min - influencer)) + min).toString()); //The maximum is exclusive and the minimum is inclusive
   }
   constructor(private httpClient?: HttpClient) {
     const a = [1, 2, 3, 4];
@@ -37,7 +39,7 @@ export class ServicesService {
     console.log(this.Data2D);
   }
 
-//******  To set the variable of the key   ******
+// ******  To set the variable of the key   ******
 
   static deepClone(Array) {
     return Array;
@@ -46,6 +48,9 @@ export class ServicesService {
   sendMessageError(error: boolean) {
     // setInterval(() => this.messageError.next(error));
     this.messageError.next(error);
+  }
+  sendIdComponent(idComponent: string) {
+    this.idComponent.next(idComponent);
   }
   get2dHeroes() {
     return this.httpClient.get<any>('../assets/Heroes.json');
