@@ -14,7 +14,7 @@ export const AdminLayoutRoutes: Routes = [
     // {
     //   path: '',
     //   children: [ {
-    //     path: 'dashboard',
+    //     path: 'dashboardO',
     //     component: DashboardComponent
     // }]}, {
     //   path: '',

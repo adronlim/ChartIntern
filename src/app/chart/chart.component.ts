@@ -40,8 +40,8 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   // inputElement: any;
   subscription: Subscription;
   // messageError$ = new Subject<boolean>().asObservable();
-  @ViewChild(ChartDirective) chartDirective: ChartDirective;
-  @ViewChild('inputCB') inputCB?: ElementRef;
+  // @ViewChild(ChartDirective) chartDirective: ChartDirective;
+  // @ViewChild('inputCB') inputCB?: ElementRef;
   @Input() onClick: boolean;
   @Input() showError: boolean;
   @Input()

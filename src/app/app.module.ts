@@ -19,10 +19,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ServicesService} from './services.service';
 import {ChartModule} from './chart/chart.module';
-import {HomePageComponent} from './home-page/home-page.component';
+// import {HomePageComponent} from './home-page/home-page.component';
 import {RouterModule, Routes} from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import {ComponentsModule} from "./components/components.module";
+import {ComponentsModule} from './components/components.module';
+import {AppRoutingModule} from './app-routing.module';
 
 // const appRoutes: Routes = [
 //   // { path: 'crisis-center', component: CrisisListComponent },
@@ -42,15 +43,15 @@ import {ComponentsModule} from "./components/components.module";
 @NgModule({
   declarations: [
     AppComponent,
-    PanelLayoutComponent,
-    NavBarComponent,
+    // PanelLayoutComponent,
+    // NavBarComponent,
     BarChartComponent,
     PieChartComponent,
     HistogramChartComponent,
-    DashboardComponent,
-    SideBarComponent,
+    // DashboardComponent,
+    // SideBarComponent,
     StackedBarChartComponent,
-    HomePageComponent,
+    // HomePageComponent,
     AdminLayoutComponent,
 
   ],
@@ -58,6 +59,8 @@ import {ComponentsModule} from "./components/components.module";
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
+    ComponentsModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     ChartModule,
@@ -67,7 +70,7 @@ import {ComponentsModule} from "./components/components.module";
     //   {enableTracing: true} // <-- debugging purposes only
     // ),
     AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
+      // apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     }),
     ComponentsModule
   ],
