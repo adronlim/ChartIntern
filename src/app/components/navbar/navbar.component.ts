@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];
-        setTimeout(function(){
+        setTimeout(() => {
             toggleButton.classList.add('toggled');
         }, 500);
 
@@ -97,7 +97,7 @@ export class NavbarComponent implements OnInit {
                 document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
             }
 
-            setTimeout(function() {
+            setTimeout(() => {
                 $layer.classList.add('visible');
             }, 100);
 

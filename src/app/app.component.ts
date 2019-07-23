@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
   ngOnInit() {
     console.log('ngOnint \n', this.IdChartComponent);
-    this.loadModule();
+    // this.loadModule();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -33,17 +33,17 @@ export class AppComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     this.Id_Chart_Component = this.IdChartComponent;
   }
 
-  loadModule() {
-    this.router.resetConfig([
-      ...this.router.config,
-      {
-        path: 'dynamicModule',
-        loadChildren: './dynamic-component.module.ts#DynamicComponentModule'
-      }
-    ]);
-
-    this.router.navigateByUrl('dynamicModule/dynamicComponent1');
-  }
+  // loadModule() {
+  //   this.router.resetConfig([
+  //     ...this.router.config,
+  //     {
+  //       path: 'dynamicModule',
+  //       loadChildren: './dynamic-component.module.ts#DynamicComponentModule'
+  //     }
+  //   ]);
+  //
+  //   this.router.navigateByUrl('dynamicModule/dynamicComponent1');
+  // }
   getChartCompID(e: any) {
     this.IdChartComponent = e;
     console.log('getChartCompID \n', e);
