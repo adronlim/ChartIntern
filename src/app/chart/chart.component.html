@@ -1,0 +1,18 @@
+<div *ngIf="_idComponentChart && chartData">
+  <button (click)="check()" [disabled]="!triggerButton" class="btn btn-dark left" name="2D"
+          type="button">2D Data Structure
+  </button>
+  <button (click)="check()" [disabled]="triggerButton" class="btn btn-dark right" name="3D"
+          type="button">3D Data Structure
+  </button>
+  <div [ngStyle]="styleHeight">
+      <div *ngIf="showError" class="word">
+        <div>The Chart is not able to support the data. Please tick the checkbox to change the data structure.</div>
+      </div>
+      <div [ngClass]="styleChart">
+          <ng-template appChartDirective appChartDirective="ChartDataComponent" ></ng-template>
+      </div>
+
+  </div>
+
+</div>
