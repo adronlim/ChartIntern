@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminLayoutRoutes } from './admin-layout.routing';
+import {AdminLayoutRoutes} from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TableListComponent } from '../../table-list/table-list.component';
@@ -29,6 +29,8 @@ import {StackedBarChartComponent} from '../../stacked-bar-chart/stacked-bar-char
 @NgModule({
   imports: [
     CommonModule,
+    // AdminLayoutRoutingModule,
+
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
@@ -39,7 +41,6 @@ import {StackedBarChartComponent} from '../../stacked-bar-chart/stacked-bar-char
     MatSelectModule,
     MatTooltipModule,
     ChartModule,
-
   ],
   declarations: [
     ChartComponent,
@@ -57,6 +58,17 @@ import {StackedBarChartComponent} from '../../stacked-bar-chart/stacked-bar-char
     PieChartComponent,
     HistogramChartComponent,
     StackedBarChartComponent
+  ],
+  exports: [
+    ChartComponent,
+    DashboardComponent,
+    UserProfileComponent,
+    TableListComponent,
+    TypographyComponent,
+    IconsComponent,
+    MapsComponent,
+    NotificationsComponent,
+    UpgradeComponent,
   ]
 })
 

@@ -18,7 +18,6 @@ import {SideBarComponent} from './side-bar/side-bar.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ServicesService} from './services.service';
-import {ChartModule} from './chart/chart.module';
 // import {HomePageComponent} from './home-page/home-page.component';
 import {RouterModule, Routes} from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
@@ -26,6 +25,9 @@ import {ComponentsModule} from './components/components.module';
 import {AppRoutingModule} from './app-routing.module';
 import {ChartComponent} from './chart/chart.component';
 import {CommonModule} from '@angular/common';
+import {AdminLayoutModule} from './layouts/admin-layout/admin-layout.module';
+import {HttpModule} from '@angular/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 // const appRoutes: Routes = [
 //   // { path: 'crisis-center', component: CrisisListComponent },
@@ -44,38 +46,29 @@ import {CommonModule} from '@angular/common';
 // ];
 @NgModule({
   declarations: [
-    AppComponent,
-    ChartDirective,
-
-    // PanelLayoutComponent,
-    // NavBarComponent,
-    // DashboardComponent,
-    // SideBarComponent,
-    // BarChartComponent,
-    // PieChartComponent,
-    // HistogramChartComponent,
-    // StackedBarChartComponent,
-    // HomePageComponent,
     AdminLayoutComponent,
-
+    AppComponent,
+    ChartDirective
   ],
   imports: [
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule,
-    ComponentsModule,
-    AppRoutingModule,
-    FormsModule,
+    HttpModule,
     HttpClientModule,
+    ComponentsModule,
     RouterModule,
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDD_r2fENAo-vFO_hOsUe6vPhtmxVhHW4k'
+    }),
+    BrowserModule,
     CommonModule,
     // .forRoot(
     //   appRoutes,
     //   {enableTracing: true} // <-- debugging purposes only
     // ),
-    AgmCoreModule.forRoot({
-      // apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    }),
+
   ],
   providers: [],
   // entryComponents: [
@@ -89,10 +82,10 @@ import {CommonModule} from '@angular/common';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  static forRoot() {
-    return {
-      ngModule: AppModule,
-      providers: [ServicesService, ChartDirective]
-    };
-  }
+  // static forRoot() {
+  //   return {
+  //     ngModule: AppModule,
+  //     providers: [ServicesService, ChartDirective]
+  //   };
+  // }
 }

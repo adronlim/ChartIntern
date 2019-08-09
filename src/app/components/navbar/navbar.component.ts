@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
     @Output() clickTruthEmitter: EventEmitter<any> = new EventEmitter<any>();
     constructor(location: Location,  private element: ElementRef, private router: Router) {
       this.location = location;
-          this.sidebarVisible = false;
+      this.sidebarVisible = false;
     }
   onClickId(e: any) {
     let click = true;
@@ -30,11 +30,12 @@ export class NavbarComponent implements OnInit {
   }
     ngOnInit() {
       this.listTitles = ROUTES.filter(listTitle => listTitle);
+      console.log(this.element);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {
         this.sidebarClose();
-        let $layer: any = document.getElementsByClassName('close-layer')[0];
+        var $layer: any = document.getElementsByClassName('close-layer')[0];
         if ($layer) {
            $layer.remove();
            this.mobile_menu_visible = 0;
@@ -52,7 +53,8 @@ export class NavbarComponent implements OnInit {
         body.classList.add('nav-open');
 
         this.sidebarVisible = true;
-    };
+    }
+
     sidebarClose() {
         const body = document.getElementsByTagName('body')[0];
         this.toggleButton.classList.remove('toggled');
@@ -93,7 +95,7 @@ export class NavbarComponent implements OnInit {
 
             if (body.querySelectorAll('.main-panel')) {
                 document.getElementsByClassName('main-panel')[0].appendChild($layer);
-            }else if (body.classList.contains('off-canvas-sidebar')) {
+            } else if (body.classList.contains('off-canvas-sidebar')) {
                 document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
             }
 
@@ -118,13 +120,18 @@ export class NavbarComponent implements OnInit {
     }
 
     getTitle() {
+      console.log(location);
+      console.log(this.location.path());
+      console.log(this.location.prepareExternalUrl(this.location.path()));
+
       var titlee = this.location.prepareExternalUrl(this.location.path());
-      if(titlee.charAt(0) === '#'){
+      console.log(titlee);
+      if (titlee.charAt(0) === '#') {
           titlee = titlee.slice( 1 );
       }
-
-      for(var item = 0; item < this.listTitles.length; item++){
-          if(this.listTitles[item].path === titlee){
+      console.log(this.listTitles);
+      for (var item = 0; item < this.listTitles.length; item++) {
+          if (this.listTitles[item].path === titlee) {
               return this.listTitles[item].title;
           }
       }

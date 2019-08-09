@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
@@ -8,15 +8,21 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import {ChartComponent} from '../../chart/chart.component';
+import { ChartComponent} from '../../chart/chart.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+
+
 
 export const AdminLayoutRoutes: Routes = [
     {
       path: '',
       children: [ {
-        path: 'dashboardO',
+        path: 'dashboard',
         component: DashboardComponent
-    }]}, {
+    }]},
+    {
       path: '',
       children: [ {
         path: 'chart',
@@ -58,7 +64,13 @@ export const AdminLayoutRoutes: Routes = [
             path: 'upgrade',
             component: UpgradeComponent
         }]
+    },
+    {
+      path: '**',
+      redirectTo: 'dashboard',
+      pathMatch: 'full',
     }
+    // ,
     // { path: 'dashboard',      component: DashboardComponent },
     // { path: 'chart',          component: ChartComponent },
     // { path: 'user-profile',   component: UserProfileComponent },
@@ -69,3 +81,4 @@ export const AdminLayoutRoutes: Routes = [
     // { path: 'notifications',  component: NotificationsComponent },
     // { path: 'upgrade',        component: UpgradeComponent },
 ];
+

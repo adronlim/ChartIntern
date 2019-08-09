@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as Chartist from 'chartist';
+import * as Chartist from 'node_modules/chartist/dist/chartist.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,13 +13,14 @@ export class DashboardComponent implements OnInit {
 
   }
   startAnimationForLineChart(chart) {
-      let seq: any, delays: any, durations: any;
+      let seq: any;
+      let delays: any;
+      let durations: any;
       seq = 0;
       delays = 80;
       durations = 500;
 
-    // tslint:disable-next-line:only-arrow-functions
-      chart.on('draw', function(data) {
+      chart.on('draw', (data) => {
         if (data.type === 'line' || data.type === 'area') {
           data.element.animate({
             d: {
@@ -30,7 +31,7 @@ export class DashboardComponent implements OnInit {
               easing: Chartist.Svg.Easing.easeOutQuint
             }
           });
-        } else if(data.type === 'point') {
+        } else if (data.type === 'point') {
               seq++;
               data.element.animate({
                 opacity: {
@@ -46,14 +47,15 @@ export class DashboardComponent implements OnInit {
 
       seq = 0;
   }
-  startAnimationForBarChart(chart){
-      let seq2: any, delays2: any, durations2: any;
+  startAnimationForBarChart(chart) {
+      let seq2: any;
+      let delays2: any;
+      let durations2: any;
 
       seq2 = 0;
       delays2 = 80;
       durations2 = 500;
-    // tslint:disable-next-line:only-arrow-functions
-      chart.on('draw', function(data) {
+      chart.on('draw', (data) => {
         if (data.type === 'bar') {
             seq2++;
             data.element.animate({
@@ -148,7 +150,7 @@ export class DashboardComponent implements OnInit {
       ['screen and (max-width: 640px)', {
         seriesBarDistance: 5,
         axisX: {
-          labelInterpolationFnc: function (value) {
+          labelInterpolationFnc(value) {
             return value[0];
           }
         }

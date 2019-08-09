@@ -1,4 +1,16 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {ChartDirective} from '../chart-directive.directive';
 import {ChartDataComponent} from '../ChartData';
 import {ServicesService} from '../services.service';
@@ -13,10 +25,13 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+  idComponent: any;
+  @Output() idEmitter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() clickTruthEmitter: EventEmitter<any> = new EventEmitter<any>();
   styleHeight: {};
   styleError: string;
-  styleContainer: string; //Styling for Container
-  styleChart: string; //Styling for Chart
+  styleContainer: string; // Styling for Container
+  styleChart: string; // Styling for Chart
   _idComponentChart: any;
   dItem: ChartDataComponent[];
   HeroesDataS?: any;
@@ -51,7 +66,6 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
   get idComponentDB(): any {
     return this._idComponentChart;
   }
-
   constructor(private Service: ServicesService) {
     this.chartComponents = ChartComponent.getChartComponent();
     // console.log(this.chartComponents);
@@ -68,19 +82,19 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
       this.Service.idReceive$.subscribe(id => {
         console.log('%cSUBSCRIBE!!!! CHARTCOMPONENT', 'background: #222; color: #bada55');
         console.log(error);
-        setTimeout(() => {    //<<<---    using ()=> syntax
+        setTimeout(() => {    // <<<---    using ()=> syntax
           this._idComponentChart = id;
           this.showError = error;
           if (!error) {
             this.styleChart = 'container';
             // this.styleContainer = 'container';
             // this.styleError = 'noDisplay';
-            this.styleHeight = {'height': '800px'};
+            this.styleHeight = {height: '800px'};
           } else {
             this.styleChart = 'noDisplay';
             // this.styleContainer = 'container';
             // this.styleError = 'container';
-            this.styleHeight = {'height': '300px'};
+            this.styleHeight = {height: '300px'};
           }
         });
         // console.log(this.showError);
@@ -118,7 +132,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
 
     // console.log(changes);
     // this.showError = changes.showError.currentValue;
-    let idChanged = ((changes.idComponentDB.currentValue != changes.idComponentDB.previousValue) && changes.idComponentDB.previousValue);
+    const idChanged = ((changes.idComponentDB.currentValue != changes.idComponentDB.previousValue) && changes.idComponentDB.previousValue);
     // let detectTo3dStructure = (changes.to3dStructure.previousValue !== undefined || changes.to3dStructure.previousValue !== null);
     // let radioChanged = (changes.to3dStructure.previousValue != changes.to3dStructure.currentValue) || detectTo3dStructure;
     if (idChanged) {
@@ -129,7 +143,13 @@ export class ChartComponent implements OnInit, AfterViewInit, OnChanges, OnDestr
 
   ngAfterViewInit() {
   }
-
+  onClickId(e: any) {
+    let click = true;
+    this.idComponent = e.target.id;
+    this.idEmitter.emit(this.idComponent);
+    this.clickTruthEmitter.emit(click);
+    console.log('OnClickId \n', this.idComponent);
+  }
   loadChartComponent(data?: any) {
 
     let chartDataParameter: any;
